@@ -38,6 +38,5 @@ shinyUI(
             source("ui-ss.R", local = TRUE)$value,
             source("ui-eda.R", local = TRUE)$value,
             source("ui-ge.R", local = TRUE)$value,
-            source("ui-de.R", local = TRUE)$value)
          )
     )

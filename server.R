@@ -70,5 +70,4 @@ shinyServer(function(input, output, session) {
     source("server-ss.R", local = TRUE)
     source("server-eda.R", local = TRUE)
     source("server-ge.R", local = TRUE)
-    source("server-de.R", local = TRUE)
 })
