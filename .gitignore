@@ -1,2 +1,6 @@
 Session.vim
 TODO
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
