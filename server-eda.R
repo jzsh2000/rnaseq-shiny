@@ -10,15 +10,11 @@ withProgress(
     incProgress(detail = "prepare sample table", amount = 0.1)
     sample_df = pheno %>%
         filter(row_number() %in% sample_rowid) %>%
-        dplyr::select(label, donor, `cell type`, `surface marker`,
-                      stimulation) %>%
+        dplyr::select(label, donor, `cell type`) %>%
         mutate(donor = fct_drop(donor),
-               `cell type` = fct_drop(`cell type`),
-               `surface marker` = fct_drop(`surface marker`),
-               stimulation = fct_drop(stimulation))
+               `cell type` = fct_drop(`cell type`))
 
-    choices_candidate = c('donor', 'cell type',
-                          'surface marker', 'stimulation')
+    choices_candidate = c('donor', 'cell type')
     choices_valid <- sapply(choices_candidate, function(x) {
         length(levels(sample_df[[x]])) >= 2
     })
@@ -31,15 +27,10 @@ withProgress(
         updateSelectizeInput(session, 'ge_group',
                              choices = choices_valid,
                              selected = 'cell type')
-        updateSelectizeInput(session, 'group_var',
-                             choices = choices_valid,
-                             selected = 'cell type')
     } else {
         updateSelectizeInput(session, 'eda_pca_color',
                              choices = choices_valid)
         updateSelectizeInput(session, 'ge_group',
-                             choices = choices_valid)
-        updateSelectizeInput(session, 'group_var',
                              choices = choices_valid)
     }
 
@@ -105,8 +96,7 @@ output$plot_eda_pca <- renderPlotly({
         mutate(label = as.character(label)) %>%
         dplyr::select(label, PC1, PC2) %>%
         left_join(pheno, by = 'label') %>%
-        dplyr::select(label, donor, `cell type`, `surface marker`,
-                      stimulation, PC1, PC2)
+        dplyr::select(label, donor, `cell type`, PC1, PC2)
     colnames(sample_pca_data) = make.names(colnames(sample_pca_data))
 
     p <- ggplot(sample_pca_data,
@@ -146,8 +136,8 @@ output$plot_eda_hm <- renderPlot({
     rld <- get_dds()$rld
     gene.top = order(-rowVars(assay(rld)))[seq_len(input$eda_gene_num)]
     # print(colData(rld))
-    if (input$group_var %in% colnames(colData(rld))) {
-        anno_df = colData(rld)[input$group_var]
+    if (input$eda_pca_color %in% colnames(colData(rld))) {
+        anno_df = colData(rld)[input$eda_pca_color]
         pheatmap(assay(rld)[gene.top,],
                  scale = "row",
                  show_rownames = FALSE,

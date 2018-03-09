@@ -21,20 +21,14 @@ library(tidyverse)
 library(glue)
 library(withr)
 library(readxl)
-library(DEFormats)
-library(edgeR)
 library(pheatmap)
 library(RColorBrewer)
 
-# pheno <- readxl::read_excel("data/pheno/pheno.xlsx", sheet = 1) %>%
-#     replace_na(list(stimulation = '-'))
-# write_rds(pheno, path = 'data/pheno/pheno.rds')
 pheno <- read_rds('data/pheno/pheno.rds')
 tx2gene <- read_tsv('data/gene/gene.map',
                     col_names = c('tx_id', 'gene_name'),
                     col_types = 'cc')
 gene_info <- read_rds('data/gene/gene_info.rds')
-# load('data/gene/human.RData')
 
 # If a column of the dataframe has only null value, then drop this column
 dropInvalidColumn <- function(df) {

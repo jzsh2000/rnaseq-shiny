@@ -16,11 +16,6 @@ library(d3heatmap)
 library(DT)
 
 pheno <- read_rds('data/pheno/pheno.rds')
-# pheno.column = setdiff(colnames(pheno), "source")
-# names(pheno.column) = gsub("_", " ", pheno.column)
-# pheno.bgi.name = subset(pheno, source == "BGI")$filename
-# pheno.pku.name = subset(pheno, source == "PKU")$sample_id
-# names(pheno.pku.name) = subset(pheno, source == "PKU")$filename
 
 shinyUI(
     fluidPage(
@@ -37,6 +32,7 @@ shinyUI(
 
             source("ui-ss.R", local = TRUE)$value,
             source("ui-eda.R", local = TRUE)$value,
-            source("ui-ge.R", local = TRUE)$value,
+            source("ui-ge.R", local = TRUE)$value
          )
     )
+)
