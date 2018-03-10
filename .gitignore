@@ -4,3 +4,5 @@ TODO
 .Rhistory
 .RData
 .Ruserdata
+*.rds
+*.[Rr][Dd]ata
