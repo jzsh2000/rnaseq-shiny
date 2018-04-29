@@ -20,7 +20,6 @@ library(genefilter)
 library(tidyverse)
 library(glue)
 library(withr)
-library(readxl)
 library(pheatmap)
 library(RColorBrewer)
 

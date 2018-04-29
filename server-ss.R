@@ -64,9 +64,8 @@ output$table_pheno_all <- DT::renderDataTable(
 )
 
 output$btn_dl_pheno <- downloadHandler(
-    filename = "sample_table.xlsx",
+    filename = "pheno.csv",
     content = function(file) {
-        file.copy('data/pheno/pheno.xlsx', file)
-    },
-    contentType = "application/vnd.ms-excel"
+        file.copy('data/pheno/pheno.csv', file)
+    }
 )
